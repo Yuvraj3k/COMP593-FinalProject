@@ -37,14 +37,14 @@ def main():
 def get_apod_date():
     num_params = len(sys.argv) - 1
     if num_params >= 1:
-        # Date parameter has been provided, so get it
+        
         try:
             apod_date = date.fromisoformat(sys.argv[1])
         except ValueError as err:
             print(f'Error: Invalid date format; {err}')
             sys.exit('Script execution aborted')
 
-        # Validate that the date is within range
+        
         MIN_APOD_DATE = date.fromisoformat("1995-06-16")
         if apod_date < MIN_APOD_DATE:
             print(f'Error: Date too far in past; First APOD was on {MIN_APOD_DATE.isoformat()}')
@@ -53,11 +53,16 @@ def get_apod_date():
             print('Error: APOD date cannot be in the future')
             sys.exit('Script execution aborted')
     else:
-        # No date parameter has been provided, so using today's date
+        
         apod_date = date.today()
     return apod_date
 
-def init_apod_cache():
+
+
+def init_apod_cache(script_dir=None):
+    image_cache_dir = os.path.join(script_dir, 'images') if script_dir else 'images'
+    image_cache_db = os.path.join(image_cache_dir, 'image_cache.db')
+
     print(f"Image cache directory: {image_cache_dir}")
     
     try:
@@ -67,7 +72,7 @@ def init_apod_cache():
         print("Image cache directory already exists.")
 
     print(f"Image cache DB: {image_cache_db}")
-    # check that wether this image cache db path exists or not
+
     if os.path.exists(image_cache_db): 
         print("Image cache DB already exists.")
     else:
