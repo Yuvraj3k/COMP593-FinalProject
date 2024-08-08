@@ -8,7 +8,7 @@ from datetime import date
 from sys import argv
 import image_lib
 import os
-NASA_API_KEY = ''  
+NASA_API_KEY = 'GPptte59834VjWh13VsQRIvsr2a1mQJwhuz9RFZA'  
 APOD_URL = "https://api.nasa.gov/planetary/apod"
 
 
